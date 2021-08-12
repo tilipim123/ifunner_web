@@ -1,0 +1,38 @@
+<% content_for :header do %>
+<section class="hero is-warning">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="section-heading text-uppercase text-center" style="color: white">
+        Produtos
+      </h1>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<div class="instrument-index-grid pt4">
+  <% @products.each do |product| %>
+
+    <div class="instrument border-light">
+      <div class="instrument-thumb">
+      <%= link_to image_tag(product.image_url(:thumb)), product  if product.image.url.present?%>
+      </div>
+
+
+    <div class="pa3">
+
+      <h3 class="fw7 f4 title"><%= link_to product.title, product %></h3>
+
+      <p class="has-text-gray fg pt1">Vendido por <%= product.business_name %></p>
+
+      <p class="f3 fw6 has-text-right pt2 price"><%= number_to_currency(product.price) %></p>
+
+      <% if current_user.id == product.user_id %>
+         <%= link_to 'Editar', edit_product_path(product), class: "button is-small" %>
+         <%= link_to 'Deletar', product, method: :delete, data: { confirm: "Tem certeza?" }, class: "button is-small" %>
+      <% end %>
+
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -17,11 +17,19 @@ ActiveRecord::Schema.define(version: 20180304213258) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "instruments", force: :cascade do |t|
-    t.string "brand"
-    t.string "model"
+  create_table "line_items", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "business_name"
     t.text "description"
-    t.string "condition"
     t.string "finish"
     t.string "title"
     t.decimal "price", precision: 5, scale: 2, default: "0.0"
@@ -29,16 +37,6 @@ ActiveRecord::Schema.define(version: 20180304213258) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.integer "user_id"
-  end
-
-  create_table "line_items", force: :cascade do |t|
-    t.integer "instrument_id"
-    t.integer "cart_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "quantity", default: 1
-    t.index ["cart_id"], name: "index_line_items_on_cart_id"
-    t.index ["instrument_id"], name: "index_line_items_on_instrument_id"
   end
 
   create_table "users", force: :cascade do |t|

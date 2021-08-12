@@ -1,33 +1,44 @@
-<section class="section">
-	<div class="container">
-		<div class="columns is-centered">
-			<div class="column is-4">
-				<h2 class="title is-2">Log in</h2>
-				<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<body id="page-top">
+  <section class="page-section" id="contact" style="background-image: none;">
+    <div class="container">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase" style="padding: 20px;">Login</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <form id="contactForm" name="sentMessage" novalidate="novalidate">
+              <div class="row" style="width: 50%; margin-left: 25%">
+                <div class="col-lg-12 text-center">
+                  <div class="form-group">
+                    <%= f.label :email, 'Email', class: 'sr-only' %>
+                    <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :password, 'Senha', class: 'sr-only' %>
+                    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Senha' %>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <% if devise_mapping.rememberable? -%>
+                  <label style="padding-right: 72%; color:white;">
+                    <%= f.check_box :remember_me, label: false %>
+                    Lembrar-me
+                  </label>
+                <% end -%>
+                <div class="col-lg-12 text-center" style="padding: 20px;">
+                  <div id="success"></div>
+                  <%= f.button "ENTRAR", class: 'btn btn-lg btn-primary btn-block' %>
+                </div>
+                <%= render "devise/shared/links" %>
+              </div>
+      <% end %>
+      </form>
 
-				  <div class="field">
-				  	<div class="control">
-				    	<%= f.input :email, required: false, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
-				    </div>
-				  </div>
-
-				  <div class="field">
-				  	<div class="control">
-				    <%= f.input :password, required: false, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
-						</div>
-					</div>
-
-					<div class="field">
-				  	<div class="control">
-				    <%= f.input :remember_me, wrapper: false, as: :boolean if devise_mapping.rememberable? %>
-				  	</div>
-					</div>
-
-				  <%= f.button :submit, "Log in", class:"button is-outlined is-medium" %>
-				<% end %>
-				<br/>
-				<%= render "devise/shared/links" %>
-			</div>
-		</div>
-	</div>
-</section>
+      </div>
+      </div>
+    </div>
+  </section>
+</body>

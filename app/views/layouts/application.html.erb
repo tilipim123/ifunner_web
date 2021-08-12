@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flanger</title>
+    <title>iFunner</title>
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,56 +21,58 @@
       <p class="alert"><%= alert %></p>
     </div>
     <% end %>
-     <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <%= link_to root_path, class:"navbar-item" do %>
-          <h1 class="title is-5">Flanger</h1>
-        <% end  %>
-      <div class="navbar-burger burger" data-target="navbar">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-
-      <div id="navbar" class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field is-grouped">
-
-            <% if total_cart_items %>
-              <%= link_to cart_path(@cart), class:"navbar-item button is-warning" do %>
-              <span class="icon is-small">
-                <i class="fa fa-shopping-cart"></i>
-              </span>
-              <span>Cart
-                <%= cart_count_over_one %>
-                </span>
-              <% end %>
-            <% end %>
-
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <%= link_to root_path, class:"navbar-brand js-scroll-trigger" do %>
+          <%= image_tag '1.png', class: 'img-fluid d-block mx-auto logo' %>
+        <% end %>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
             <% if user_signed_in? %>
-              <%= link_to 'Sell', new_instrument_path, class: "navbar-item button is-dark" %>
-
-              <div class="navbar-item has-dropdown is-hoverable">
-                <%= link_to 'Account', edit_user_registration_path, class: "navbar-link" %>
-                <div class="navbar-dropdown is-right">
-                  <%= link_to current_user.name, edit_user_registration_path, class:"navbar-item" %>
-                  <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"navbar-item" %>
-                </div>
-              </div>
+              <%= link_to 'Adicionar Produto', new_product_path, class: "nav-link" %>
+              <%= link_to edit_user_registration_path, class:"nav-link" do %>
+                      <span class="icon is-small">
+                        <i class="fa fa-user"></i>
+                      </span>
+                <%= current_user.name %>
+              <% end %>
+              <%= link_to products_path, class:"nav-link"  do %>
+                      <span class="icon is-small">
+                        <i class="fa fa-bars"></i>
+                      </span>
+                Produtos
+              <% end %>
+                  <% if total_cart_items %>
+                    <%= link_to cart_path(@cart), class:"nav-link" do %>
+                      <span class="icon is-small">
+                        <i class="fa fa-shopping-cart"></i>
+                      </span>
+                      Carrinho
+                    <% end %>
+                  <% end %>
+              <%= link_to destroy_user_session_path, method: :delete, class:"nav-link"  do %>
+                      <span class="icon is-small">
+                        <i class="fa fa-sign-out"></i>
+                      </span>
+                Sair
+              <% end %>
             <% else %>
-
-            <%= link_to "Sign In", new_user_session_path, class:"navbar-item button is-warning" %>
-            <%= link_to "Sign up", new_user_registration_path, class:"navbar-item button is-warning"%>
-
+            <li class="nav-item">
+              <%= link_to "LOGIN", new_user_session_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "CADASTRE-SE", new_user_registration_path, class:"nav-link"%>
+            </li>
             <% end %>
-
-            </div>
-          </div>
+          </ul>
         </div>
-    </div>
-  </nav>
+      </div>
+    </nav>
+
 
   <%= yield(:header) %>
 

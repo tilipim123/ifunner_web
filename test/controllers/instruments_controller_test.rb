@@ -2,47 +2,47 @@ require 'test_helper'
 
 class InstrumentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @instrument = instruments(:one)
+    @product = instruments(:one)
   end
 
   test "should get index" do
-    get instruments_url
+    get products_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_instrument_url
+    get new_product_url
     assert_response :success
   end
 
-  test "should create instrument" do
-    assert_difference('Instrument.count') do
-      post instruments_url, params: { instrument: { brand: @instrument.brand, condition: @instrument.condition, description: @instrument.description, finish: @instrument.finish, model: @instrument.model, price: @instrument.price, title: @instrument.title } }
+  test "should create product" do
+    assert_difference('Product.count') do
+      post products_url, params: { product: { brand: @product.brand, condition: @product.condition, description: @product.description, finish: @product.finish, model: @product.model, price: @product.price, title: @product.title } }
     end
 
-    assert_redirected_to instrument_url(Instrument.last)
+    assert_redirected_to product_url(Product.last)
   end
 
-  test "should show instrument" do
-    get instrument_url(@instrument)
+  test "should show product" do
+    get product_url(@product)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_instrument_url(@instrument)
+    get edit_product_url(@product)
     assert_response :success
   end
 
-  test "should update instrument" do
-    patch instrument_url(@instrument), params: { instrument: { brand: @instrument.brand, condition: @instrument.condition, description: @instrument.description, finish: @instrument.finish, model: @instrument.model, price: @instrument.price, title: @instrument.title } }
-    assert_redirected_to instrument_url(@instrument)
+  test "should update product" do
+    patch product_url(@product), params: { product: { brand: @product.brand, condition: @product.condition, description: @product.description, finish: @product.finish, model: @product.model, price: @product.price, title: @product.title } }
+    assert_redirected_to product_url(@product)
   end
 
-  test "should destroy instrument" do
-    assert_difference('Instrument.count', -1) do
-      delete instrument_url(@instrument)
+  test "should destroy product" do
+    assert_difference('Product.count', -1) do
+      delete product_url(@product)
     end
 
-    assert_redirected_to instruments_url
+    assert_redirected_to products_url
   end
 end
